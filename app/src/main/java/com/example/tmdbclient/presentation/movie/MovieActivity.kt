@@ -2,7 +2,6 @@ package com.example.tmdbclient.presentation.movie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -14,10 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tmdbclient.R
 import com.example.tmdbclient.databinding.ActivityMovieBinding
-import com.example.tmdbclient.presentation.di.Injector
-import java.util.zip.Inflater
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieBinding
     private lateinit var adapter:MovieAdapter
@@ -27,7 +26,6 @@ class MovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_movie)
-        (application as Injector).createMovieSubComponent().inject(this)
         movieViewModel=ViewModelProvider(this,factory).get(MovieViewModel::class.java)
         initRecyclerView()
     }
